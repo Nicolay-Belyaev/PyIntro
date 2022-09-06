@@ -9,14 +9,16 @@
 
 float_number = float(input('Введите вещественное число: '))
 accuracy = int(input('Сколько знаков после запятой? '))  # возможно, для этого есть метод, но я не нашел.
-left_side = int(float_number)
-right_side = float_number - left_side
+# 123.321
+left_side = int(float_number)  # 123
+right_side = float_number - left_side # 0.321
 
 sum_of_left_side = 0
 while left_side % 10 != 0:
     sum_of_left_side += left_side % 10
     left_side //= 10
 
+# 0.321 -> 3.21 -> sum + 3 -> 3.21 - 3 -> 0.21
 sum_of_right_side = 0
 i = 0
 while i < accuracy:
