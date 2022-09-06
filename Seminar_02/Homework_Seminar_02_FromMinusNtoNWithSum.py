@@ -3,17 +3,12 @@
 import random
 
 N = int(input('Откуда начнем? '))
-list_from_mN_to_N = []
-for i in range(-N, N + 1):
-    list_from_mN_to_N.append(i)
-list_of_num = []
-counter = 0
-while counter < N:
-    list_of_num.append(list_from_mN_to_N[random.randint(0, len(list_from_mN_to_N)-1)])
-    counter += 1
+list_of_num = [0] * (N*2+1)
+for i in range(len(list_of_num)):
+    list_of_num[i] = random.randint(-N, N)
 print(list_of_num)
 
-# заморочился с вводом немного / сомнительный вариант c try-except и break, хотелось пощупать /
+# заморочился с вводом немного / сомнительный вариант c try-except и break, но хотелось пощупать /
 list_of_pos = []
 while True:
     try:
@@ -37,8 +32,12 @@ else:
         result *= list_of_num[j-1]
     print(result)
 
-# и тут я перечитал задание, оказывается надо через пробел ввод сделать =(
-# надо бы доделать проверку ввода до конца, но чет уже лень
+# переделать структуру
+# 0. проверяем на пустоту
+# 1. переделываем в инт (с проверкой: isinteger() или try-catch)
+#   2. проверяем на дубли
+#     3. проверяем на попадания в диапазон
+# на каждом шаге хорошо бы возвращать на этап ввода, если проверка не прошла.
 
 input_string = input(f'Введите позиции через пробел.\nПозиции в диапазоне от 1 до {len(list_of_num)} и не должны повторяться: ')
 if len(input_string) == 0:
