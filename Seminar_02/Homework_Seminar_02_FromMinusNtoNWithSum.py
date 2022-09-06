@@ -3,8 +3,8 @@
 import random
 
 N = int(input('Откуда начнем? '))
-list_of_num = [0] * (N*2+1)
-for i in range(len(list_of_num)):
+list_of_num = [0] * (N)
+for i in range(N):
     list_of_num[i] = random.randint(-N, N)
 print(list_of_num)
 
@@ -38,6 +38,7 @@ else:
 #   2. проверяем на дубли
 #     3. проверяем на попадания в диапазон
 # на каждом шаге хорошо бы возвращать на этап ввода, если проверка не прошла.
+# можно попробовать сделать функцию с рекурсией на каждой проверке
 
 input_string = input(f'Введите позиции через пробел.\nПозиции в диапазоне от 1 до {len(list_of_num)} и не должны повторяться: ')
 if len(input_string) == 0:
