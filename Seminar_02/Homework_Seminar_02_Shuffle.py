@@ -1,12 +1,19 @@
 # Реализуйте алгоритм перемешивания списка.
 import random
 
-# я пока не буду писать свой рандомайзер. все равно приду к какому-нибудь варианту использования UNIX Timestamp
+# не буду писать свой рандомайзер. все равно приду к какому-нибудь варианту использования UNIX Timestamp
 
-array = [0, 1, 2, 3, 4]
-result_array = [] * len(array)
+in_array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+result_array = []
 
-for i in range(0, len(array)):
-    rnd = random.randint(0, 4)
-    result_array.append(array[rnd])
+# проблема этого метода в том, что чем дальше к концу массива, тем чаще будет срабатывать else
+# у этой задачи точно больше одного решения
+while len(result_array) != len(in_array):
+    rnd_elem = in_array[random.randint(0, len(in_array)-1)]
+    if rnd_elem not in result_array:
+        result_array.append(rnd_elem)
+    else:
+        continue
 
+print(in_array)
+print(result_array)
