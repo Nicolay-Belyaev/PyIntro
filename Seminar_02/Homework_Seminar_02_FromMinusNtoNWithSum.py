@@ -32,26 +32,36 @@ else:
         result *= list_of_num[j-1]
     print(result)
 
-# переделать структуру
-# 0. проверяем на пустоту
-# 1. переделываем в инт (с проверкой: isinteger() или try-catch)
-#   2. проверяем на дубли
-#     3. проверяем на попадания в диапазон
-# на каждом шаге хорошо бы возвращать на этап ввода, если проверка не прошла.
-# можно попробовать сделать функцию с рекурсией на каждой проверке
+# хорошо бы сдеать возврат к вводу если что-то пошло не так. но получается какая-то рекурсивная ерунда.
+# В дебаггере висит два инстанса функции, первый, где ввод некорректный, второй отрабаывает нормально,
+# на нормальном вводе. Пока не знаю, что с этим делать.
 
-input_string = input(f'Введите позиции через пробел.\nПозиции в диапазоне от 1 до {len(list_of_num)} и не должны повторяться: ')
-if len(input_string) == 0:
-    print("не выбрано ни одной позиции")
-else:
+
+def pos_in_string():
+    input_string = input(f'Введите позиции через пробел.\nПозиции в диапазоне от 1 до {len(list_of_num)} и не должны повторяться: ')
     input_string_splited = input_string.split(' ')
+    if len(input_string_splited) == 0:
+        print('Не введено ниодной позиции')
+        #pos_in_string()
+    try:
+        for k in range(len(input_string_splited)):
+            input_string_splited[k] = int(input_string_splited[k])
+    except ValueError:
+        print(f'Похоже, вы ввели не число.')
+        #pos_in_string()
+    for o in input_string_splited:
+        if o not in range(1, len(list_of_num) + 1):
+            print(f"Какой-то номер позиции меньше 1 или больше {len(list_of_num)}.")
+            #pos_in_string()
+    for m in input_string_splited:
+        if input_string_splited.count(m) >= 2:
+            print(f'Похоже, какие-то позиции повторяются.')
+            break
+            #pos_in_string()
     result1 = 1
-    for i in range(len(input_string_splited)):
-        input_string_splited[i] = int(input_string_splited[i])
-    for j in input_string_splited:
-        if j not in range(1, len(list_of_num) + 1):
-            print(f"Введен номер позиции меньше 1 или больше {len(list_of_num)}.")
+    for n in input_string_splited:
+        result1 *= list_of_num[n - 1]
+    return result1
 
-    for k in input_string_splited:
-        result1 *= list_of_num[k-1]
-    print(result1)
+res = pos_in_string()
+print(res)
