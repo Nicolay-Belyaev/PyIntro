@@ -1,6 +1,6 @@
 # Реализуйте алгоритм перемешивания списка.
 import random
-import time
+# import time
 
 # start_time = time.time()
 
@@ -30,7 +30,7 @@ print(result_array)
 # len 500.000    - 19.6325 sec
 # len 1.000.000  - 90.8550 sec
 
-# non-uniqes, random(0, 10000)
+# non-uniques, random(0, 10000)
 # len 10         - 0.00000 sec
 # len 100        - 0.00100 sec
 # len 1000       - 0.00298 sec
