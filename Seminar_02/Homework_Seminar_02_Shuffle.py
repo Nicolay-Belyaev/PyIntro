@@ -39,3 +39,5 @@ print(result_array)
 # len 100.000    - 0.98244 sec
 # len 500.000    - 20.4036 sec
 # len 1.000.000  - 93.5962 sec
+
+random.shuffle
