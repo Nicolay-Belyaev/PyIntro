@@ -42,26 +42,26 @@ def pos_in_string():
     input_string_splited = input_string.split(' ')
     if len(input_string_splited) == 0:
         print('Не введено ниодной позиции')
-        #pos_in_string()
+        pos_in_string()
+        return
     try:
         for k in range(len(input_string_splited)):
             input_string_splited[k] = int(input_string_splited[k])
     except ValueError:
         print(f'Похоже, вы ввели не число.')
-        #pos_in_string()
+        pos_in_string()
+        return
     for o in input_string_splited:
         if o not in range(1, len(list_of_num) + 1):
             print(f"Какой-то номер позиции меньше 1 или больше {len(list_of_num)}.")
-            #pos_in_string()
+            pos_in_string()
+            return
     for m in input_string_splited:
         if input_string_splited.count(m) >= 2:
             print(f'Похоже, какие-то позиции повторяются.')
-            break
-            #pos_in_string()
+            pos_in_string()
+            return
     result1 = 1
     for n in input_string_splited:
         result1 *= list_of_num[n - 1]
-    return result1
-
-res = pos_in_string()
-print(res)
+    print(result1)
