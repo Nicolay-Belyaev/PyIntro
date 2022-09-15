@@ -21,3 +21,5 @@ def product_of_pairs(array):
 
 
 print(product_of_pairs(array_of_numbers))
+
+
