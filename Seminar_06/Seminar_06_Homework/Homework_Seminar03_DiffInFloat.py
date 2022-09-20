@@ -5,8 +5,6 @@
 
 def float_minmax_diff(array):
     cleared_from_int = list(map(lambda x: x - int(x), array))
-    # for i in range(len(array)):
-    #     array[i] = array[i] - int(array[i])
     result = round(max(cleared_from_int) - min(cleared_from_int), 3)
     return result
 

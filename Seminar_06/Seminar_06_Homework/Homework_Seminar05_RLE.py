@@ -27,15 +27,15 @@ class rle(object):
             if i == 0:
                 outcoming_data.append(str(current_symbol) + str(symbol_counter))
             current_symbol = incoming_data[i]
-            if current_symbol == incoming_data[i-1]:
+            if current_symbol == incoming_data[i - 1]:
                 symbol_counter += 1
             else:
-                outcoming_data.append(str(current_symbol)+str(symbol_counter))
+                outcoming_data.append(str(current_symbol) + str(symbol_counter))
                 symbol_counter = 1
-                current_symbol = incoming_data[i-1]
+                current_symbol = incoming_data[i - 1]
         # если у нас вся строка состоит из одного и того же символа
         if symbol_counter > 1 and len(outcoming_data) == 0:
-            outcoming_data.append(str(current_symbol)+str(symbol_counter - 1))
+            outcoming_data.append(str(current_symbol) + str(symbol_counter - 1))
         outcoming_data.reverse()
         result = ''.join(outcoming_data)
 
@@ -49,24 +49,8 @@ class rle(object):
             incoming_data = ind.read()
 
             literals = list(filter(lambda x: x.isalpha(), incoming_data))
-            coefficients = [int(s) for s in re.findall(r'-?\d+\.?\d*', incoming_data)]  # когда уперся в то, что не могу вытащить числа из строки
+            coefficients = [int(s) for s in re.findall(r'-?\d+\.?\d*', incoming_data)]
             result = ''.join([literals[i] * coefficients[i] for i in range(len(literals))])
-
-            # outcoming_data = []
-            # current_literal = incoming_data[0]
-            # current_number = ''
-            # for i in range(1, len(list_incoming_data)):
-            #     if list_incoming_data[i].isdigit():
-            #         current_number += list_incoming_data[i]
-            #     elif list_incoming_data[i].isalpha():
-            #         outcoming_data.append((current_literal) * int(current_number))
-            #         current_literal = list_incoming_data[i]
-            #         current_number = ''
-            #     # чисто костыль. но что бы сделать фишечку с проходом по массиву в обратку как в шифровании,
-            #     # придется попарно развернуть элементы. это больше проблем, чем подпорочку из if поставить.
-            #     # есть у меня подозрения, что я не оптимально RLE реализую, ага.
-            #     if i == len(list_incoming_data) - 1:
-            #         outcoming_data.append((current_literal) * int(current_number))
 
         with open(f'{output_path}', 'w') as ot:
             ot.write(result)

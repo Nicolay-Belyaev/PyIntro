@@ -12,4 +12,4 @@ while number != 1:
     else:
         divider += 1
 
-print(simple_dividers)  
+print(simple_dividers)

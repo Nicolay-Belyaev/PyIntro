@@ -30,7 +30,7 @@ def poly_adder(poly1, poly2):
         else:
             longer_poly = poly2
         len_diff = max(len(poly1), len(poly2))
-        for i in range (counter, len_diff):
+        for i in range(counter, len_diff):
             prep_array.append(longer_poly[i])
     # разворачиваем и собираем итоговую строку
     prep_array.reverse()

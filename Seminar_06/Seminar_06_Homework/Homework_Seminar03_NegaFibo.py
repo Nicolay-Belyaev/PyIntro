@@ -14,8 +14,6 @@ def nego_fibo(border):
 
     def fibo_filler(size: int):
         base_array = [fibo(i) for i in range(size + 1)]
-        # for i in range(size + 1):
-        #     base_array.append(fibo(i))
         return base_array
 
     def mirror(array: list):
@@ -23,11 +21,7 @@ def nego_fibo(border):
         mirrored_array = list(map(lambda x: array[x]*-1 if x % 2 == 0 else array[x], range(len(array))))
         mirrored_array.reverse()
         return mirrored_array
-        #
-        # array.remove(0)
-        # for i in range(0, len(array), 2):
-        #     array[i] = -array[i]
-        # return array
+
 
     def glue(array1: list, array2: list):  # можно extend'ом, но когда начала делать костыли, сложно остановиться
         for i in range(len(array2)):

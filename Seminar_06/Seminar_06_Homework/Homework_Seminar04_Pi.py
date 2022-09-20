@@ -24,8 +24,6 @@ def chudnovsky(n):
 
 def pi_with_accuracy(accuracy: int):
     str_of_zero = ["0" for i in range(accuracy)]
-    # for i in range(accuracy):
-    #     str_of_zero.append("0")
     zero = "".join(str_of_zero) # можно было бы строку через конкатенацию собрать, но конкатенация - неочевидная вещь.
     pi = (chudnovsky(4).quantize(Decimal(f"1.{zero}"), ROUND_FLOOR))
     return pi
