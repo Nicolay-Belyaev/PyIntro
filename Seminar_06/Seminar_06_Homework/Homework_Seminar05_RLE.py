@@ -12,7 +12,7 @@
 import re
 
 
-class rle(object):
+class RLE(object):
     """Предоставляет доступ к функциям кодировки/декодировки строки по неоптимизированному алгоритму RLE"""
 
     def code(input_path: str, output_path: str):
@@ -56,5 +56,5 @@ class rle(object):
             ot.write(result)
 
 
-rle.code('input.txt', 'coded.txt')
-rle.decode('coded.txt', 'decoded.txt')
+RLE.code('input.txt', 'coded.txt')
+RLE.decode('coded.txt', 'decoded.txt')
