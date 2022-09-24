@@ -2,11 +2,15 @@
 
 import sqlite3 as sql
 
-# TODO: сделать всем функция реторны, что бы они отдавали в контроллер результат своей работы, а тот,
-# TODO: в свою очередь, передавал их в UI. +
+# TODO: обернуть функции в класс, вынести словарь для read и update в __поля класса__(?);
+# TODO: переписать коннекторы через with us;
+# TODO: модифицировать возвраты функций что бы они более информативны (например, create возвращает созданную запись);
+# TODO: запилить функции импорта/экспорта из SQL в JSON, TXT и во что угодно еще;
+# TODO: модифицировать функцию поиска на: "пустые параметры -> возврат всех записей __построчно__(!)";
+# TODO: зациклить основную логику что бы программа после выполнения 1 запроса возвращалась на принятие следующего.
 
 
-def create(first_name, second_name, phone_number):  # TODO: переписать коннектор через with as
+def create(first_name, second_name, phone_number):
     connection = sql.connect("database.db")
     cursor = connection.cursor()
     request = f'''
@@ -21,7 +25,6 @@ def create(first_name, second_name, phone_number):  # TODO: переписать
 
 
 def read(key, value):
-    # TODO вынести в поля класса (?) и дать доступ всем нуждающимся функциям
     keys_dict = {
         'ID': 'ID',
         'ИМЯ': 'FirstName',
@@ -38,7 +41,6 @@ def read(key, value):
 
 
 def update(key, new_value, i):
-    # TODO вынести в поля класса (?) и дать доступ всем нуждающимся функциям
     keys_dict = {
         'ID': 'ID',
         'ИМЯ': 'FirstName',

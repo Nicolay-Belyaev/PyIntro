@@ -1,13 +1,21 @@
-import CRUD as crud
-import UI as interface
-import sqlite3 as sql
+"""
+У контроллера следующие задачи:
+0. Вывести приветственное сообщение (ui.intro)
+1. С помощью функции интерфейса ui.get_command_parm получить от пользователя команду и её параметры.
+2. Выбрать, какая функция из модели (CRUD) должна быть вызвана. Для этого используется первый элемент
+списка command_and_param, содержащий название команды пользователя. В зависимости от команды, подставить
+в вызываемую из CRUD функцию параметры (элементы списка command_and_param со второго до последнего).
+Эту механику реализует функция ui_request_handler.
+3. Вернуть результаты работы функции из CRUD пользователю с помощью функции ui.request_explorer
+"""
 
-# TODO подумать над механизмом возврата результатов в UI
+import CRUD as crud
+import UI as ui
 
 
 def logic():
     def ui_request_handler():
-        command_and_param = interface.get_command_parm()
+        command_and_param = ui.get_command_parm()
         match command_and_param[0]:
             case "запись":
                 return crud.create(command_and_param[1], command_and_param[2], command_and_param[3])
@@ -18,6 +26,6 @@ def logic():
             case "удаление":
                 return crud.delete(command_and_param[1])
 
-    interface.intro()
+    ui.intro()
     request_result = ui_request_handler()
-    interface.request_explorer(request_result)
+    ui.request_explorer(request_result)
