@@ -3,10 +3,10 @@
 import sqlite3 as sql
 
 # TODO: сделать всем функция реторны, что бы они отдавали в контроллер результат своей работы, а тот,
-# TODO: в свою очередь, передавал их в UI
+# TODO: в свою очередь, передавал их в UI. +
 
 
-def create(first_name, second_name, phone_number):  # TODO: переписать коннектор через with us
+def create(first_name, second_name, phone_number):  # TODO: переписать коннектор через with as
     connection = sql.connect("database.db")
     cursor = connection.cursor()
     request = f'''
@@ -17,7 +17,7 @@ def create(first_name, second_name, phone_number):  # TODO: переписать
     '''
     cursor.execute(request).fetchall()
     connection.commit()
-    return ...
+    return str('Запись произведена')
 
 
 def read(key, value):
@@ -32,9 +32,9 @@ def read(key, value):
     cursor = connection.cursor()
     request = f'''
     SELECT * FROM Phonebook WHERE {keys_dict.get(key)} = "{value}";'''
-    print(cursor.execute(request).fetchall())
+    result = (cursor.execute(request).fetchall())
     connection.close()
-    return ...
+    return result
 
 
 def update(key, new_value, i):
@@ -53,7 +53,7 @@ def update(key, new_value, i):
     cursor.execute(request).fetchall()
     connection.commit()
     connection.close()
-    return ...
+    return str(f'В запись с ID {i} внесены изменения. Новое значение поля {key} = {new_value}.')
 
 
 def delete(i):
@@ -65,4 +65,4 @@ def delete(i):
     cursor.execute(request).fetchall()
     connection.commit()
     connection.close()
-    return ...
+    return str(f'Запись с ID {i} удалена.')

@@ -34,3 +34,6 @@ def get_command_parm():
             case _:
                 print('Извини, ты или опечатался, или я пока не знаю такой команды. Попробуй еще раз.\n')
 
+
+def request_explorer(result):
+    print(result)
