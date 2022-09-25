@@ -10,7 +10,7 @@ def intro():
     print(f'''
     Приятно познакомиться, {username}!\n 
     Ты пользуешься  консольным телефонным справочником.\n
-    Сейчас в справочнике доступны 4 действия: "запись", "поиск", "изменение" и "удаление", а также команда "выход".\n
+    Сейчас в справочнике доступны 5 действий: "запись", "поиск", "изменение", "удаление" и "экспорт", а также команда "выход".\n
     ''')
 
 
@@ -19,7 +19,7 @@ def get_command_parm():
     command = ''
     command = input("Введи действие, которое хочешь совершить: ").lower()
 
-    while command not in ["запись", "чтение", "поиск", "удаление", "выход"]:
+    while command not in ["запись", "чтение", "поиск", "удаление", "экспорт", "выход"]:
         print('Извини, ты или опечатался, или я пока не знаю такой команды. Попробуй еще раз.\n')
         command = input("Введи действие, которое хочешь совершить: ").lower()
 
@@ -42,12 +42,30 @@ def get_command_parm():
         case "удаление":
             param_id = input('Укажи ID записи для удаления: ')
             return [command, param_id]
+        case "экспорт":
+            param_format = input("Во что сохранить? (txt/csv): ").lower()
+            while param_format not in ["txt", "csv"]:
+                param_format = input("Неверный ввод: (txt или csv): ").lower()
+            return [command, param_format]
         case "выход":
             print('Еще увидимся!\n')
             return ["выход"]
 
 
-
 def request_explorer(result):
     """Выводит результат работы одной из CRUD-функций"""
     print(result)
+
+
+# запрашивает параметры экспорта
+def get_export_params():
+    choice = input("Хотите экспортировать? (1 - да, 0 - нет): ")
+    while choice not in ["1", "0"]:
+        choice = input("Неверный ввод: (1 - да, 0 - нет): ")
+    if choice == "1":
+        f = input("Во что сохранить? (txt/csv): ").lower()
+        while f not in ["txt", "csv"]:
+            f = input("Неверный ввод: (txt или csv): ").lower()
+        return f
+    else:
+        return None

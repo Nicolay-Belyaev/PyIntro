@@ -1,26 +1,29 @@
 import csv
-from pathlib import Path
+import sqlite3 as sql
 
 
-# функция принимает список кортежей, и построчно добавляет в текстовый файл каждый переданный контакт
-def export_as_txt(contacts):
-    filename = "contacts_exported.txt"
-    with open(filename, 'a') as f:
-        for contact in contacts:
-            f.write(' '.join([str(s) for s in contact]) + '\n')
+# функция принимает необходимый формат и в зависимости от параметра
+# создает файл в определенном формате
+def export_as(required_format):
+    connection = sql.connect("database.db")
+    cursor = connection.cursor()
+    request = f'''
+    SELECT * FROM Phonebook'''
+    result = (cursor.execute(request).fetchall())
+    connection.close()
 
-
-# функция принимает список кортежей, и построчно добавляет в файл csv каждый переданный контакт
-# если файла csv нет, то он создается и первой строчкой записываются названия колонок
-def export_as_csv(contacts):
-    filename = "contacts_exported.csv"
-    header = ["ID", "имя", "фамилия", "телефон"]
-    my_file = Path(filename)
-    if not my_file.exists():
-        with open(filename, 'w', encoding='UTF8', newline='') as f:
-            writer = csv.writer(f)
-            writer.writerow(header)
-
-    with open(filename, 'a', encoding='UTF8', newline='') as f:
-        writer = csv.writer(f)
-        writer.writerows(contacts)
+    filename = "contacts_exported"
+    match required_format:
+        case "txt":
+            filename += ".txt"
+            with open(filename, 'w') as f:
+                for row in result:
+                    f.write(' '.join([str(s) for s in row]) + '\n')
+        case "csv":
+            filename += ".csv"
+            header = ["ID", "имя", "фамилия", "телефон"]
+            with open(filename, 'w', encoding='UTF8', newline='') as f:
+                writer = csv.writer(f)
+                writer.writerow(header)
+                writer.writerows(result)
+    return f"Экспортировал в {filename}"
