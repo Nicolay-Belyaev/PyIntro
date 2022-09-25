@@ -25,7 +25,10 @@ def logic():
                 return crud.update(command_and_param[1], command_and_param[2], command_and_param[3])
             case "удаление":
                 return crud.delete(command_and_param[1])
+            case "выход":
+                exit()
 
     ui.intro()
-    request_result = ui_request_handler()
-    ui.request_explorer(request_result)
+    while True:
+        request_result = ui_request_handler()
+        ui.request_explorer(request_result)
