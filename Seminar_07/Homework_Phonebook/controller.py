@@ -14,25 +14,30 @@ import UI as ui
 import export_parametric as exp
 
 
-def logic():
-    def ui_request_handler():
-        command_and_param = ui.get_command_parm()
-        match command_and_param[0]:
-            case "запись":
-                return crud.create(command_and_param[1], command_and_param[2], command_and_param[3])
-            case "поиск":
-                return crud.read(command_and_param[1], command_and_param[2])
-            case "изменение":
-                return crud.update(command_and_param[1], command_and_param[2], command_and_param[3])
-            case "удаление":
-                return crud.delete(command_and_param[1])
-            case "экспорт":
-                return exp.export_as(command_and_param[1])
-            case "выход":
-                exit()
+def ui_request_handler():
+    """
+    функция принимает аргументы от пользователя в виде списка [команда, параметры...],
+    далее пробрасывает параметры в соответствующие функции.
+    функции возвращают строку-отчет, который затем передается в ui и далее в консоль.
+    """
+    command_and_param = ui.get_command_parm()
+    match command_and_param[0]:
+        case "запись":
+            return crud.create(command_and_param[1], command_and_param[2], command_and_param[3])
+        case "поиск":
+            return crud.read(command_and_param[1], command_and_param[2])
+        case "изменение":
+            return crud.update(command_and_param[1], command_and_param[2], command_and_param[3])
+        case "удаление":
+            return crud.delete(command_and_param[1])
+        case "экспорт":
+            return exp.export_as(command_and_param[1])
+        case "выход":
+            exit()
 
+
+def logic():
     ui.intro()
     while True:
         request_result = ui_request_handler()
         ui.request_explorer(request_result)
-
