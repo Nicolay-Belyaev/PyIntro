@@ -56,16 +56,3 @@ def request_explorer(result):
     """Выводит результат работы одной из CRUD-функций"""
     print(result)
 
-
-# запрашивает параметры экспорта
-def get_export_params():
-    choice = input("Хотите экспортировать? (1 - да, 0 - нет): ")
-    while choice not in ["1", "0"]:
-        choice = input("Неверный ввод: (1 - да, 0 - нет): ")
-    if choice == "1":
-        f = input("Во что сохранить? (txt/csv): ").lower()
-        while f not in ["txt", "csv"]:
-            f = input("Неверный ввод: (txt или csv): ").lower()
-        return f
-    else:
-        return None
