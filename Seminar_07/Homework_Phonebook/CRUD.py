@@ -1,6 +1,7 @@
 # Задача модели - предоставить методы создания, чтения, модификации и удаление записей в базу данных (CRUD)
 
 import sqlite3 as sql
+import export_parametric
 
 # TODO: обернуть функции в класс, вынести словарь для read и update в __поля класса__(?);
 # TODO: переписать коннекторы через with as;
@@ -38,6 +39,9 @@ def read(key, value):
     SELECT * FROM Phonebook WHERE {keys_dict.get(key)} = "{value}";'''
     result = (cursor.execute(request).fetchall())
     connection.close()
+
+    export_parametric.export_as_txt(result)
+    export_parametric.export_as_csv(result)
     return result
 
 
