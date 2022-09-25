@@ -2,9 +2,11 @@ import csv
 import sqlite3 as sql
 
 
-# функция принимает необходимый формат и в зависимости от параметра
-# создает файл в определенном формате
 def export_as(required_format):
+    """
+    функция принимает необходимый формат и в зависимости от параметра
+    создает файл в определенном формате
+    """
     connection = sql.connect("database.db")
     cursor = connection.cursor()
     request = f'''
