@@ -61,6 +61,6 @@ def get_command_parm():
 
 
 def request_explorer(result):
-    """Выводит результат работы одной из CRUD-функций"""
+    """Выводит результат работы одной из CRUD-функций построчно"""
     for i in result:
         print(i)

@@ -5,8 +5,7 @@ import sqlite3 as sql
 
 def export_as(required_format):
     """
-    Функция принимает от пользователя формат файла и экспортирует весь справочник
-    в заданный формат.
+    Функция принимает от пользователя формат файла и экспортирует весь справочник в заданный формат.
     """
     with sql.connect('database.db') as connection:
         cursor = connection.cursor()

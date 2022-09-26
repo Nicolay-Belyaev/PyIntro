@@ -1,4 +1,7 @@
-# Задача модели - предоставить методы создания, чтения, модификации и удаление записей в базу данных (CRUD)
+'''
+Задача модели - предоставить методы создания, чтения, модификации и удаление записей в базу данных (CRUD).
+Все функции возвращают коллекцию для корректной работы функции UI.request_explorer().
+'''
 
 import sqlite3 as sql
 # TODO: модифицировать возвраты функций что бы они более информативны (например, create возвращает созданную запись);
@@ -7,7 +10,7 @@ import sqlite3 as sql
 
 
 class Options(object):
-
+    # словарь используют функции read и update для перевода пользовательского ввода названий полей в понятный SQL
     keys_dict = {
         'ID': 'ID',
         'ИМЯ': 'FirstName',
@@ -16,6 +19,8 @@ class Options(object):
     }
 
     def create(self, first_name, second_name, phone_number):
+        """Создает в БД новую запись с параметрами first_name = имя, second_name = фамилия, phone_number - телефон"""
+
         with sql.connect('database.db') as connection:
             cursor = connection.cursor()
             request = f'''
@@ -28,6 +33,8 @@ class Options(object):
             return [str('Запись произведена')]
 
     def read(self, key, value):
+        """Поиск по БД по 1 параметру. Если оставить пару ключ-значение пустой ('') - вернет все записи БД"""
+
         with sql.connect('database.db') as connection:
             cursor = connection.cursor()
             request = f'''
@@ -38,6 +45,7 @@ class Options(object):
             return result
 
     def update(self, key, new_value, i):
+        """Изменяет 1 поле 1 записи за один вызов функции"""
         with sql.connect('database.db') as connection:
             cursor = connection.cursor()
             request = f'''
@@ -48,6 +56,8 @@ class Options(object):
             return [str(f'В запись с ID {i} внесены изменения. Новое значение поля {key} = {new_value}.')]
 
     def delete(self, i):
+        """Удаляет запись из БД по ID. Не приводит к пересчету поля 'ID' в БД (остальные записи сохраняют свои ID)"""
+
         with sql.connect('database.db') as connection:
             cursor = connection.cursor()
             request = f'''
