@@ -4,15 +4,14 @@ import sqlite3 as sql
 
 def export_as(required_format):
     """
-    функция принимает необходимый формат и в зависимости от параметра
-    создает файл в определенном формате
+    Функция принимает от пользователя формат файла и экспортирует весь справочник
+    в заданный формат.
     """
-    connection = sql.connect("database.db")
-    cursor = connection.cursor()
-    request = f'''
-    SELECT * FROM Phonebook'''
-    result = (cursor.execute(request).fetchall())
-    connection.close()
+    with sql.connect('database.db') as connection:
+        cursor = connection.cursor()
+        request = f'''
+        SELECT * FROM Phonebook'''
+        result = (cursor.execute(request).fetchall())
 
     filename = "contacts_exported"
     match required_format:
@@ -28,4 +27,4 @@ def export_as(required_format):
                 writer = csv.writer(f)
                 writer.writerow(header)
                 writer.writerows(result)
-    return f"Экспортировал в {filename}"
+    return [f"Экспортировал в {filename}"]
