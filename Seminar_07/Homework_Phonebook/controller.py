@@ -9,9 +9,9 @@
 3. Вернуть результаты работы функции из CRUD пользователю с помощью функции ui.request_explorer
 """
 
-import CRUD as crud
+from CRUD import *
 import UI as ui
-import export_parametric as exp
+import export as exp
 
 
 def ui_request_handler():
@@ -21,15 +21,16 @@ def ui_request_handler():
     функции возвращают строку-отчет, который затем передается в ui и далее в консоль.
     """
     command_and_param = ui.get_command_parm()
+    options = Options()
     match command_and_param[0]:
         case "запись":
-            return crud.create(command_and_param[1], command_and_param[2], command_and_param[3])
+            return options.create(command_and_param[1], command_and_param[2], command_and_param[3])
         case "поиск":
-            return crud.read(command_and_param[1], command_and_param[2])
+            return options.read(command_and_param[1], command_and_param[2])
         case "изменение":
-            return crud.update(command_and_param[1], command_and_param[2], command_and_param[3])
+            return options.update(command_and_param[1], command_and_param[2], command_and_param[3])
         case "удаление":
-            return crud.delete(command_and_param[1])
+            return options.delete(command_and_param[1])
         case "экспорт":
             return exp.export_as(command_and_param[1])
         case "выход":
