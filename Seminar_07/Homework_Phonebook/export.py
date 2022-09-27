@@ -3,9 +3,10 @@ import sqlite3 as sql
 
 # TODO: экспорт исполняется только после выхода из справочника. отладить, сделать, что бы сразу исполнялся.
 
-def export_as(required_format):
+
+def export_as(format):
     """
-    Функция принимает от пользователя формат файла и экспортирует весь справочник в заданный формат.
+    Функция принимает от пользователя формат файла (csv/txt) и экспортирует весь справочник в заданный формат.
     """
     with sql.connect('database.db') as connection:
         cursor = connection.cursor()
@@ -14,7 +15,7 @@ def export_as(required_format):
         result = (cursor.execute(request).fetchall())
 
     filename = "contacts_exported"
-    match required_format:
+    match format:
         case "txt":
             filename += ".txt"
             with open(filename, 'w') as f:
