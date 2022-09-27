@@ -30,7 +30,7 @@ class Options(object):
                 ("{first_name}", "{second_name}", "{phone_number}");
             '''
             cursor.execute(request).fetchall()
-            return [str('Запись произведена')]
+            return [str(f'Произведена запись {first_name} {second_name} {phone_number}')]
 
     def read(self, key, value):
         """Поиск по БД по 1 параметру. Если оставить пару ключ-значение пустой ('') - вернет все записи БД"""
@@ -66,3 +66,15 @@ class Options(object):
             cursor.execute(request).fetchall()
             connection.commit()
             return [str(f'Запись с ID {i} удалена.')]
+
+    def delete_all(self):
+        """Удаляет данный БД. (чистый лист)"""
+
+        with sql.connect('database.db') as connection:
+            cursor = connection.cursor()
+            request = f'''
+                 DELETE FROM Phonebook
+                 '''
+            cursor.execute(request).fetchall()
+            connection.commit()
+            return [str('Телефонный справочник очищен.')]
