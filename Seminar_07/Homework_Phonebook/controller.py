@@ -8,10 +8,11 @@
 Эту механику реализует функция ui_request_handler.
 3. Вернуть результаты работы функции из CRUD пользователю с помощью функции ui.request_explorer
 """
-
+#
 from CRUD import *
 import UI as ui
 import export as exp
+import import_contact as imp
 
 
 def ui_request_handler():
@@ -33,6 +34,8 @@ def ui_request_handler():
             return crud.delete(command_and_param[1])
         case "экспорт":
             return exp.export_as(command_and_param[1])
+        # case "импорт":
+        #     return imp.import_as(command_and_param[1], command_and_param[2], command_and_param[3])
         case "выход":
             exit()
 
