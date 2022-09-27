@@ -5,8 +5,8 @@
 
 import sqlite3 as sql
 # TODO: модифицировать возвраты функций что бы они более информативны (например, create возвращает созданную запись);
-# TODO: подумать над обработкой исключений (разделить логику функций на подключение и работу и обложить try-excet'ами(?))
-# TODO: сделать импорт из CVS, TXT, чего угодно еще
+# TODO: подумать над обработкой исключений (разделить логику функций на подключение и работу и обложить try-except'ами(?))
+# TODO: сделать импорт из CVS, TXT, чего угодно еще.
 
 
 class Options(object):
@@ -20,7 +20,6 @@ class Options(object):
 
     def create(self, first_name, second_name, phone_number):
         """Создает в БД новую запись с параметрами first_name = имя, second_name = фамилия, phone_number - телефон"""
-
         with sql.connect('database.db') as connection:
             cursor = connection.cursor()
             request = f'''
@@ -32,9 +31,9 @@ class Options(object):
             cursor.execute(request).fetchall()
             return [str(f'Произведена запись {first_name} {second_name} {phone_number}')]
 
+
     def read(self, key, value):
         """Поиск по БД по 1 параметру. Если оставить пару ключ-значение пустой ('') - вернет все записи БД"""
-
         with sql.connect('database.db') as connection:
             cursor = connection.cursor()
             request = f'''
@@ -57,7 +56,6 @@ class Options(object):
 
     def delete(self, i):
         """Удаляет запись из БД по ID. Не приводит к пересчету поля 'ID' в БД (остальные записи сохраняют свои ID)"""
-
         with sql.connect('database.db') as connection:
             cursor = connection.cursor()
             request = f'''
