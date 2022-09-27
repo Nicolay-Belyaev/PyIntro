@@ -21,16 +21,16 @@ def ui_request_handler():
     функции возвращают коллекцию-отчет, который затем передается в ui и далее в консоль.
     """
     command_and_param = ui.get_command_parm()
-    options = Options()
+    crud = Options()
     match command_and_param[0]:
         case "запись":
-            return options.create(command_and_param[1], command_and_param[2], command_and_param[3])
+            return crud.create(command_and_param[1], command_and_param[2], command_and_param[3])
         case "поиск":
-            return options.read(command_and_param[1], command_and_param[2])
+            return crud.read(command_and_param[1], command_and_param[2])
         case "изменение":
-            return options.update(command_and_param[1], command_and_param[2], command_and_param[3])
+            return crud.update(command_and_param[1], command_and_param[2], command_and_param[3])
         case "удаление":
-            return options.delete(command_and_param[1])
+            return crud.delete(command_and_param[1])
         case "экспорт":
             return exp.export_as(command_and_param[1])
         case "выход":
