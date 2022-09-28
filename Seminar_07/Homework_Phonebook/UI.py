@@ -41,11 +41,17 @@ def get_command_parm():
         case "поиск":
             print('Для вывода всех записей справочника, оставь поля запроса пустыми\n')
             param_key = input('Введи 1 поле для поиска (ID/имя/фамилия/телефон): ').upper()
+            while param_key not in ["ID", "ИМЯ", "ФАМИЛИЯ", "ТЕЛЕФОН", ""]:
+                print('Извини, ты или опечатался. Попробуй еще раз.\n')
+                param_key = input('Введи одно поле для поиска (ID/имя/фамилия/телефон): ').upper()
             param_value = input('Введи искомое значение: ')
             return [command, param_key, param_value]
         case "изменение":
             param_id = input('Укажи ID записи для изменения: ')
             param_key = input('Введи 1 поле для изменения (ID/имя/фамилия/телефон): ').upper()
+            while param_key not in ["ID", "ИМЯ", "ФАМИЛИЯ", "ТЕЛЕФОН"]:
+                print('Извини, ты или опечатался. Попробуй еще раз.\n')
+                param_key = input('Введи одно поле для поиска (ID/имя/фамилия/телефон): ').upper()
             param_new_value = input('Введи новое значение этого поля: ')
             return [command, param_key, param_new_value, param_id]
         case "удаление":
