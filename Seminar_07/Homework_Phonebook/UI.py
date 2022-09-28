@@ -56,6 +56,11 @@ def get_command_parm():
             while param_format not in ["txt", "csv"]:
                 param_format = input("Неверный ввод: (txt или csv): ").lower()
             return [command, param_format]
+        case "импорт":
+            param_rewrite = int(input("0 - дописать к текущему справочнику, 1 - удалить текущий справочник: "))
+            param_path = input('Введите путь до каталога с файлом: ')
+            param_file = input('Введите имя файла (с расширением): ')
+            return [command, param_rewrite, param_path, param_file]
         case "выход":
             print('Еще увидимся!\n')
             return ["выход"]
