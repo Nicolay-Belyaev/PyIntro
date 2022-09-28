@@ -23,13 +23,14 @@ class Options(object):
 
         with sql.connect('database.db') as connection:
             cursor = connection.cursor()
-            request = f'''
+            request = (f'''
             INSERT INTO Phonebook 
                 (FirstName, SecondName, Phonenumber) 
             VALUES 
                 ("{first_name}", "{second_name}", "{phone_number}");
-            '''
+            ''')
             cursor.execute(request).fetchall()
+            connection.commit()
             return [str(f'Произведена запись {first_name} {second_name} {phone_number}')]
 
     def read(self, key, value):

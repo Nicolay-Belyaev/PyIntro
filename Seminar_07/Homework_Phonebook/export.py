@@ -1,7 +1,6 @@
 import csv
 import sqlite3 as sql
 
-# TODO: экспорт исполняется только после выхода из справочника. отладить, сделать, что бы сразу исполнялся.
 
 def export_as(required_format):
     """

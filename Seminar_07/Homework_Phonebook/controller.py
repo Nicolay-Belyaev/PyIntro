@@ -34,8 +34,8 @@ def ui_request_handler():
             return options.delete(command_and_param[1])
         case "экспорт":
             return exp.export_as(command_and_param[1])
-        # case "импорт":
-        #     return imp.import_as(command_and_param[1], command_and_param[2], command_and_param[3])
+        case "импорт":
+            return imp.import_as(command_and_param[1], command_and_param[2], command_and_param[3])
         case "выход":
             exit()
 
