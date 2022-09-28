@@ -51,15 +51,6 @@ def get_command_parm():
         case "удаление":
             param_id = input('Укажи ID записи для удаления: ')
             return [command, param_id]
-        case "импорт":
-            choice = input("Добавить или перезаписать текущий телефонный справочник(используй: добавить или перезаписать): ")
-            while choice not in ["добавить", "перезаписать"]:
-                choice = input("Неверный ввод: (добавить или перезаписать): ").lower()
-            param_format = input("Какой тип файлов будет использоваться для импорта? (txt/csv): ").lower()
-            while param_format not in ["txt", "csv"]:
-                param_format = input("Неверный ввод: (txt или csv): ").lower()
-            name_file = input("Введите название файла с полным адрессом. ")
-            return [command, choice, param_format, name_file]
         case "экспорт":
             param_format = input("Во что сохранить? (txt/csv): ").lower()
             while param_format not in ["txt", "csv"]:

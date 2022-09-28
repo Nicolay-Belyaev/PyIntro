@@ -12,7 +12,6 @@
 from CRUD import *
 import UI as ui
 import export as exp
-import import_contact as imp
 
 
 def ui_request_handler():

@@ -21,9 +21,7 @@ def export_as(format):
                     f.write(' '.join([str(s) for s in row]) + '\n')
         case "csv":
             filename += ".csv"
-            header = ["ID", "имя", "фамилия", "телефон"]
             with open(filename, 'w', encoding='UTF8', newline='') as f:
                 writer = csv.writer(f)
-                writer.writerow(header)
                 writer.writerows(result)
     return [f"Экспортировал в {filename}"]
