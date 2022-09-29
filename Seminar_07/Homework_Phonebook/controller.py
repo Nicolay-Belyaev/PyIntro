@@ -33,7 +33,7 @@ def ui_request_handler():
         case "удаление":
             return crud.delete(command_and_param[1])
         case "экспорт":
-            return exp.export_as(command_and_param[1])
+            return exp.export_as(command_and_param[1], command_and_param[2])
         case "импорт":
             return imp.import_as(command_and_param[1], command_and_param[2], command_and_param[3])
         case "выход":
