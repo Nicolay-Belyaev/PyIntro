@@ -18,13 +18,14 @@ import export as exp
 import import_contact as imp
 
 
-def ui_request_handler(command_and_param):
+def ui_request_handler(command_and_param=None):
     """
     функция принимает аргументы от пользователя в виде списка [команда, параметры...],
     далее пробрасывает параметры в соответствующие функции.
     функции возвращают коллекцию-отчет, который затем передается в ui и далее в консоль.
     """
-    # command_and_param = ui.get_command_parm()
+    if command_and_param is None:
+        command_and_param = ui.get_command_parm()
     crud = Options()
     match command_and_param[0]:
         case "запись":
@@ -43,7 +44,7 @@ def ui_request_handler(command_and_param):
             exit()
 
 
-def logic():
+def logic_using_gui():
     # ui.intro()
     win = MainWindow()
     win.draw_window()
@@ -55,3 +56,8 @@ def logic():
         ui.request_explorer(request_result)
 
 
+def logic_using_console():
+    ui.intro()
+    while True:
+        request_result = ui_request_handler()
+        ui.request_explorer(request_result)

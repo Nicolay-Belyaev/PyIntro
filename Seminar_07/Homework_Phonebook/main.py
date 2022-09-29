@@ -4,4 +4,6 @@
 
 import controller
 
-controller.logic()
+controller.logic_using_console()
+# controller.logic_using_gui()
+

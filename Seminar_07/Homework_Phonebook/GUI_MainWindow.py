@@ -5,17 +5,15 @@ class MainWindow:
     window = Tk()
     w_ask = None
     gui_command_and_params = []
-    flag_command_is_set = False
     _font = "Calibri"
 
+    # базовые функции описаны в отдельном файле
     gui_create = gui_create_
     gui_search = gui_search_
-    gui_quit = gui_quit_
-
     gui_update = gui_update_
+    gui_quit = gui_quit_
+    gui_delete = gui_delete_
 
-    def set_flag(self, value):
-        self.flag_command_is_set = value
 
     def get_current_command(self):
         return self.gui_command_and_params.copy()
@@ -39,13 +37,19 @@ class MainWindow:
         header.pack(anchor="center", ipadx=20, ipady=20)
 
     def draw_menu(self, menu):
-        new_item = Menu(menu, tearoff=0)
-        new_item.add_command(label='Авторы', command=self.draw_authors)
-        new_item.add_command(label='Запись', command=lambda: self.gui_create(self.w_ask))
-        new_item.add_command(label='Поиск', command=lambda: self.gui_search(self.w_ask))
-        new_item.add_command(label='Изменение', command=lambda: self.gui_update(self.w_ask))
-        new_item.add_command(label='Выход', command=lambda: self.gui_quit())
-        menu.add_cascade(label='Меню', menu=new_item)
+        first_item = Menu(menu, tearoff=0)
+        second_item = Menu(menu, tearoff=0)
+
+        first_item.add_command(label='Запись', command=lambda: self.gui_create(self.w_ask))
+        first_item.add_command(label='Поиск', command=lambda: self.gui_search(self.w_ask))
+        first_item.add_command(label='Изменение', command=lambda: self.gui_update(self.w_ask))
+        first_item.add_command(label='Удаление', command=lambda: self.gui_delete(self.w_ask))
+        first_item.add_command(label='Выход', command=lambda: self.gui_quit())
+
+        second_item.add_command(label='Авторы', command=self.draw_authors)
+
+        menu.add_cascade(label='Меню', menu=first_item)
+        menu.add_cascade(label='Авторы', menu=second_item)
         self.window.config(menu=menu)
 
     def set_command_and_params(self, w_ask, command, *params):
