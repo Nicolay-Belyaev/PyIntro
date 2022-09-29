@@ -8,20 +8,23 @@
 Эту механику реализует функция ui_request_handler.
 3. Вернуть результаты работы функции из CRUD пользователю с помощью функции ui.request_explorer
 """
+import tkinter
+
 #
 from CRUD import *
 import UI as ui
+from GUI_MainWindow import MainWindow
 import export as exp
 import import_contact as imp
 
 
-def ui_request_handler():
+def ui_request_handler(command_and_param):
     """
     функция принимает аргументы от пользователя в виде списка [команда, параметры...],
     далее пробрасывает параметры в соответствующие функции.
     функции возвращают коллекцию-отчет, который затем передается в ui и далее в консоль.
     """
-    command_and_param = ui.get_command_parm()
+    # command_and_param = ui.get_command_parm()
     crud = Options()
     match command_and_param[0]:
         case "запись":
@@ -41,7 +44,14 @@ def ui_request_handler():
 
 
 def logic():
-    ui.intro()
-    while True:
-        request_result = ui_request_handler()
+    # ui.intro()
+    win = MainWindow()
+    win.draw_window()
+
+    while win.window.state() == "normal":
+        win.set_loop()
+        l = win.get_current_command()
+        request_result = ui_request_handler(l if len(l) else ["выход"])
         ui.request_explorer(request_result)
+
+
