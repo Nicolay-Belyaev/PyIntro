@@ -24,6 +24,8 @@ def ui_request_handler(command_and_param=None):
     далее пробрасывает параметры в соответствующие функции.
     функции возвращают коллекцию-отчет, который затем передается в ui и далее в консоль.
     """
+
+    # command_and_param будет None если мы работаем с консолью
     if command_and_param is None:
         command_and_param = ui.get_command_parm()
     crud = Options()
@@ -45,14 +47,13 @@ def ui_request_handler(command_and_param=None):
 
 
 def logic_using_gui():
-    # ui.intro()
-    win = MainWindow()
-    win.draw_window()
+    win = MainWindow()  # создаем объект класса Окно
+    win.draw_window()  # рисуем инициализирующее первое окно с приветствием и меню
 
     while win.window.state() == "normal":
-        win.set_loop()
-        l = win.get_current_command()
-        request_result = ui_request_handler(l if len(l) else ["выход"])
+        win.set_loop()  # позволяет не закрывать программу после сделанной операции
+        l = win.get_current_command()  # получает список [операции, *параметров...]
+        request_result = ui_request_handler(l if len(l) else ["выход"])  # передает список дальше в handler
         ui.request_explorer(request_result)
 
 

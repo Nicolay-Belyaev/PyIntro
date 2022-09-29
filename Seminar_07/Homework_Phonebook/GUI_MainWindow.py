@@ -14,7 +14,6 @@ class MainWindow:
     gui_quit = gui_quit_
     gui_delete = gui_delete_
 
-
     def get_current_command(self):
         return self.gui_command_and_params.copy()
 
