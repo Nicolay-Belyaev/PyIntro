@@ -16,7 +16,7 @@ def import_as(rewrite: bool, directory_path, full_file_name: str):
     file_path - путь до каталога с файлом из ОС,
     full_file_name - имя с файлом с расширением (вид file.csv или file.txt)"""
 
-    options = Options()  # нужная для функции create и delete_all
+    options = Options()  # нужна для функции create и delete_all
 
     if rewrite:
         options.delete_all()
