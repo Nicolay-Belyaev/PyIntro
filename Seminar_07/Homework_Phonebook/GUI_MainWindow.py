@@ -24,7 +24,9 @@ class MainWindow:
         n1.insert(0, filename)
 
     def opendialogue_save_file(self, n1, extension):
-        filename = filedialog.asksaveasfilename(filetypes=[("txt file", ".txt"), ("csv file", ".csv")])
+        filename = filedialog.asksaveasfilename(filetypes=[("txt file", "*.txt"), ("csv file", "*.csv")],
+                                                defaultextension="*.*")
+        print(filename)
         if filename:  # user selected file
             name, ext = filename.split('.')
             n1.delete(0, END)
