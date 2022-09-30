@@ -61,13 +61,13 @@ def get_command_parm():
             param_format = input("Во что сохранить? (txt/csv): ").lower()
             while param_format not in ["txt", "csv"]:
                 param_format = input("Неверный ввод: (txt или csv): ").lower()
-            param_path = input('Введите путь, куда сохранить (оставите пустым - сохраню в текущую папку): ')
+            param_path = input('Введите путь, куда сохранить (оставите пустым - сохраню в текущую папку)'
+                               'формат: /папка/папка/имя без расширения ')
             return [command, param_format, param_path]
         case "импорт":
             param_rewrite = int(input("0 - дописать к текущему справочнику, 1 - удалить текущий справочник: "))
-            param_path = input('Введите путь до каталога с файлом: ')
-            param_file = input('Введите имя файла (с расширением): ')
-            return [command, param_rewrite, param_path, param_file]
+            param_path = input('Введите путь до каталога с файлом и сам файл с расширениеем: ')
+            return [command, param_rewrite, param_path]
         case "выход":
             print('Еще увидимся!\n')
             return ["выход"]

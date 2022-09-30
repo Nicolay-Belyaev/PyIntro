@@ -13,6 +13,25 @@ class MainWindow:
     gui_update = gui_update_
     gui_quit = gui_quit_
     gui_delete = gui_delete_
+    gui_export = gui_export_
+    gui_import = gui_import_
+
+    def opendialogue_find_file(self, n1):
+        filename = filedialog.askopenfilename(
+            filetypes=(('All files', '*.*'), ('text files', '*.txt'), ('Csv files', '*.csv')))
+
+        n1.delete(0, END)
+        n1.insert(0, filename)
+
+    def opendialogue_save_file(self, n1, extension):
+        filename = filedialog.asksaveasfilename(filetypes=[("txt file", ".txt"), ("csv file", ".csv")])
+        if filename:  # user selected file
+            name, ext = filename.split('.')
+            n1.delete(0, END)
+            n1.insert(0, name)
+            extension.set(ext)
+        else:  # user cancel the file browser window
+            print("No file chosen")
 
     def get_current_command(self):
         return self.gui_command_and_params.copy()
@@ -29,8 +48,7 @@ class MainWindow:
 
     def draw_init_screen(self, window):
         header = Label(window,
-                       text="  Привет! Это телефонный справочник\n"
-                            "  Выбери в меню, что нужно сделать",
+                       text="  Выбери в меню, что нужно сделать",
                        font=(self._font, 20),
                        height=2)
         header.pack(anchor="center", ipadx=20, ipady=20)
@@ -43,6 +61,8 @@ class MainWindow:
         first_item.add_command(label='Поиск', command=lambda: self.gui_search(self.w_ask))
         first_item.add_command(label='Изменение', command=lambda: self.gui_update(self.w_ask))
         first_item.add_command(label='Удаление', command=lambda: self.gui_delete(self.w_ask))
+        first_item.add_command(label='Экспорт', command=lambda: self.gui_export(self.w_ask))
+        first_item.add_command(label='Импорт', command=lambda: self.gui_import(self.w_ask))
         first_item.add_command(label='Выход', command=lambda: self.gui_quit())
 
         second_item.add_command(label='Авторы', command=self.draw_authors)

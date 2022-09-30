@@ -2,7 +2,7 @@ import csv
 import sqlite3 as sql
 
 
-def export_as(extension, path):
+def export_as(extension, filepath):
     """
     Функция принимает от пользователя формат файла (csv/txt) и экспортирует весь справочник в заданный формат.
     """
@@ -12,11 +12,8 @@ def export_as(extension, path):
         SELECT * FROM Phonebook'''
         result = (cursor.execute(request).fetchall())
 
-    if len(path) and not path.endswith('/'):
-        path += '/'
-    path += "contacts_exported." + extension
-
-    with open(path, 'w', encoding='UTF16', newline='') as f:
+    filepath += '.' + extension
+    with open(filepath, 'w', encoding='UTF16', newline='') as f:
         match extension:
             case "txt":
                 for row in result:
@@ -26,4 +23,4 @@ def export_as(extension, path):
                 writer = csv.writer(f)
                 writer.writerow(header)
                 writer.writerows(result)
-    return [f"Экспортировал в {path}"]
+    return [f"Экспортировал в {filepath}"]
